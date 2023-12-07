@@ -8,7 +8,7 @@ let sort_str = (string) =>{
  }
 
 function isAnagram(str1, str2) {
-  if(sort_str(str1) == sort_str(str2)){
+  if(sort_str(str1.toLowerCase()) == sort_str(str2.toLowerCase())){
     return true;
   }else{
     return false;

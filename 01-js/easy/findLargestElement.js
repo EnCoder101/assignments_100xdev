@@ -6,10 +6,10 @@
 */
 
 function findLargestElement(numbers) {
-    let max = arr[0]
+    let max = numbers[0]
     for(let i = 1 ;i < numbers.length ; i++){
-        if(max < arr[i]){
-            max = arr[i];
+        if(max < numbers[i]){
+            max = numbers[i];
         }
     }
     return max;
