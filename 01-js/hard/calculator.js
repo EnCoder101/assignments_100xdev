@@ -16,6 +16,55 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Calculator {}
+class Calculator {
+  constructor(result){
+    this.result =0;
+  }
+
+  add(x){
+    return this.result = this.result + x;
+  }
+
+  subtract(x){
+    return this.result = this.result - x;
+  }
+
+  multiply(x){
+    return this.result = this.result * x;
+  }
+
+  divide(x){
+    if(x == 0){
+      throw new Error('cannot divide by 0');
+    }
+    return this.result = this.result / x;
+  }
+
+  clear(){
+    return this.result = 0;
+  }
+
+
+  getResult(){
+    return this.result;
+  }
+  containsAlphabet(str){
+    return /[a-zA-Z]/.test(str);
+  }
+
+  calculate(str){
+    if(this.containsAlphabet(str)){
+      throw new Error('Input must be a number');
+    }
+    str = str.split(" ").join("");
+    this.result = eval(str);
+    if(isFinite(this.result)){  // this.result == Infinity
+      throw new Error('cannot divide by 0');
+    }
+    return this.result;
+  }
+}
 
 module.exports = Calculator;
+let calculator = new Calculator();
+console.log(calculator.calculate('10 / 0'));
