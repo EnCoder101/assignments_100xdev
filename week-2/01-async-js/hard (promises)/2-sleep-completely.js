@@ -4,5 +4,19 @@
  */
 
 function sleep (seconds) {
-
+    return new Promise((resolve,reject)=>{
+        setTimeout(() => {
+            resolve(seconds);
+        }, 1000 * seconds);
+    })
 }
+
+async function thread(n){
+    let p = await sleep(n).then((result)=>{
+        console.log("result",result);
+    });
+    for(let i = 1; i <=n ;i++){
+        console.log(i);
+    }
+}
+thread(6);
