@@ -39,11 +39,74 @@
 
   Testing the server - run `npm run test-todoServer` command in terminal
  */
+
   const express = require('express');
   const bodyParser = require('body-parser');
-  
+  const data = require('./todos')
   const app = express();
   
   app.use(bodyParser.json());
-  
+  let todo = [];
+
+  function addids(){
+    for(let i = 0 ; i < todo.length ;i++){
+      todo[i].id = i + 1; 
+    };
+  }
+
+
+  app.get('/todos',(req,res)=>{
+    addids()
+    res.json(
+      todo
+    )
+  })
+
+  app.get('/todos/:id',(req,res)=>{
+    const id = req.params.id;
+    const onetodo = todo[id - 1];
+    if(onetodo){
+       return res.json(
+                onetodo
+              )  
+    }
+    res.status(404).send("No ID found")
+  })
+
+  app.post('/todos',(req,res)=>{
+    const inputData = {
+      "title": req.body.title,
+      "description":req.body.description,
+      "completed": req.body.completed
+    }
+    todo.push(inputData);
+    addids()
+    res.status(201).send({id : todo[todo.length - 1 ].id})
+  })
+
+  app.put('/todos/:id',(req,res)=>{
+    const id = req.params.id;
+    addids();
+    if(todo[id - 1]){
+      todo[id - 1].completed = req.body.completed;
+      return res.send("updated");
+    }
+    res.status(404).send("No ID Found");
+  })
+
+  app.delete('/todos/:id',(req,res)=>{
+    const id = req.params.id;
+    addids();
+    if(todo[id - 1]){
+      todo.splice( id - 1 , 1 );
+      return res.send("deleted Id no " + id );
+    }
+    res.status(404).send("No ID found")
+  });
+
+  app.use("*",(req,res)=>{
+    res.status(404).send('Route not found')
+  })
+
+  // app.listen(3000);
   module.exports = app;
