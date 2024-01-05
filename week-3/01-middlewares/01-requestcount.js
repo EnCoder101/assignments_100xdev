@@ -10,9 +10,12 @@ let requestCount = 0;
 // maintain a count of the number of requests made to the server in the global
 // requestCount variable
 function middleware(req,res,next){
-  return ++requestCount;
+  requestCount++;
+  // console.log(requestCount);
+  next();
 }
-app.use(middleware());
+
+app.use(middleware);
 
 app.get('/user', function(req, res) {
   res.status(200).json({ name: 'john' });
@@ -27,3 +30,4 @@ app.get('/requestCount', function(req, res) {
 });
 
 module.exports = app;
+// app.listen(3000);
