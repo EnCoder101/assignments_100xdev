@@ -35,7 +35,6 @@ router.post('/signup', (req, res) => {
     })
     
 });
-let courseId = 1;
 router.post('/courses', adminMiddleware, (req, res) => {
     // Implement course creation logic
     const title = req.body.title;
@@ -54,11 +53,12 @@ router.post('/courses', adminMiddleware, (req, res) => {
                 description,
                 price,
                 imageLink
-            }).then(            
+            }).then((value)=>{
                 res.json({
-                message: "Course is created.",
-                courseId: courseId++
-            }));
+                    message: "Course is created.",
+                    courseId: value._id
+                })
+            });
         }
         else{
             res.status(400).json({
