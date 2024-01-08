@@ -7,7 +7,9 @@ function userMiddleware(req, res, next) {
     const token = bearerToken.split(" ")[1];
     try{
         const decoded = jwt.verify(token,"1");
-        next();
+        req.username = decoded.username;
+        req.password = decoded.password;
+        next();;
     } catch(err){
         console.log(err);
         res.status(400).json({

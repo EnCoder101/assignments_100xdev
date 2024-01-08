@@ -74,7 +74,11 @@ router.get('/courses', async (req, res) => {
 router.post('/courses/:courseId',userMiddleware, async (req, res) => {
     // Implement course purchase logic
     const courseId = req.params.courseId;
-    const userData = jwt.decode(req.headers.authorization.split(" ")[1]);
+    // const userData = jwt.decode(req.headers.authorization.split(" ")[1]);
+    const userData = {
+        username: req.username,
+        password: req.password
+    }
     try{
         const courseAdded = await User.updateOne({
             username : userData.username,
@@ -100,7 +104,10 @@ router.post('/courses/:courseId',userMiddleware, async (req, res) => {
 
 router.get('/purchasedCourses', userMiddleware, async (req, res) => {
     // Implement fetching purchased courses logic
-    const decodedData = jwt.decode(req.headers.authorization.split(" ")[1]);
+    // const decodedData = jwt.decode(req.headers.authorization.split(" ")[1]);
+    const decodedData = {
+        username: req.username
+    }
     const userData = await User.findOne({
         username : decodedData.username
     })
