@@ -1,0 +1,58 @@
+.main-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.container{
+    min-width: 33.3%;
+}
+.border{
+    padding-bottom: 50px;
+    margin: 10px;
+    border: 2px solid rgba(150, 145, 145, 0.37);
+    border-radius: 10px;
+    padding-left: 25px;
+    min-width: 33%;
+}
+
+.name{
+    margin-top: 50px;
+    margin-bottom: 10px;
+    font-size: xxx-large;
+}
+
+.description{
+    margin: 20px 0;
+    font-size: x-large;
+}
+
+
+.interest-container{
+    margin: 20px 0;
+}
+.interest-header{
+    font-size: x-large;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.interest{
+    font-size: larger;
+    margin-bottom: 5px;
+}
+
+.social-media{
+    display: flex;
+    flex-direction: row;
+}
+
+button{
+    background-color: rgb(0 123 255);
+    color: aliceblue;
+    font-size: x-large;
+    padding: 15px;
+    margin: 0 20px 0 0;
+    border-radius: 10px;
+    border: 0;
+}
