@@ -46,5 +46,5 @@ function updateUser(username, { firstName, lastName }) {
         console.log(res);
     });
 }
-updateUser("mobu@gmail.com", { firstName: "mobu", lastName: "mobu" });
+// updateUser("mobu@gmail.com",{firstName : "mobu", lastName : "mobu"})
 // insertUser("mobu@gmail.com","12345","adamya","agrawal")
