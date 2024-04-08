@@ -22,7 +22,7 @@ model survey {
 model question {
   question_id Int       @id @default(autoincrement())
   question    String
-  survey      survey    @relation(fields: [survey_id], references: [id])
+  survey      survey    @relation(fields: [survey_id], references: [id] ,onDelete: Cascade)
   survey_id   Int
   options     options[]
 }
@@ -30,6 +30,6 @@ model question {
 model options {
   option_id   Int      @id @default(autoincrement())
   option      String
-  question    question @relation(fields: [question_id], references: [question_id])
+  question    question @relation(fields: [question_id], references: [question_id] , onDelete: Cascade)
   question_id Int
 }

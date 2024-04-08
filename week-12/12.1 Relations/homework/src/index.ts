@@ -96,16 +96,41 @@ app.get("/surveys/:id", async (req, res) => {
 })
 
 app.put("/surveys/:id", async (req, res) => {
-    // Update a specific survey.
-    const survey_id = parseInt(req.params.id);
-    const modified_value = await prisma.survey.update({
-        where: {
-            id: survey_id
-        },
-        data: {
-
-        }
-    })
+    // Update a specific survey. // not working as expected ..... onlt modifying survey name
+    try {
+        const toBeModifiedSurvey_id = parseInt(req.params.id);
+        const surveydataTitle = req.body.title;
+        const newQuestion = req.body.question;
+        // console.log("newQuestion",newQuestion);
+        const modified_survey = await prisma.survey.update({
+            where: {
+                id: toBeModifiedSurvey_id
+            },
+            data: {
+                title: surveydataTitle
+            }
+        })
+        // const modified_question = await prisma.question.update({
+        //     where: {
+        //         survey_id: toBeModifiedSurvey_id
+        //     },
+        //     data: {
+        //         question: newQuestion[0].text
+        //     },
+        //     select: {
+        //         question_id: true
+        //     }
+        // })
+        res.status(200).json({
+            message: "Data Modifed",
+            surveyData: modified_survey
+        });
+    } catch (err) {
+        res.status(400).json({
+            message: "some error",
+            error: err
+        });
+    }
 })
 
 app.delete("/surveys/:id", async (req, res) => {
